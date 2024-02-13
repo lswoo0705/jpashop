@@ -3,12 +3,12 @@ package jpabook.jpashop.domain.Item;
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.Item.Item;
 import jpabook.jpashop.domain.Order;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
     @Id
     @GeneratedValue
