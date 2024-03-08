@@ -58,4 +58,18 @@ public class OrderRepository {
                         " join fetch o.delivery d", Order.class
         ).getResultList();
     }
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                        "select distinct o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d" +
+                                " join fetch o.orderItems oi" +
+                                " join fetch oi.item i", Order.class)
+                // oneToMany fetch join 관계에서는 페이징 불가능
+                // 모든 메모리를 db에서 읽어오기 때문에 매우 위험
+                .setFirstResult(1)
+                .setMaxResults(100)
+                .getResultList();
+    }
 }
