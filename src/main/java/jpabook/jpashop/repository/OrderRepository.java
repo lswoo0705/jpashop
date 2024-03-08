@@ -68,8 +68,18 @@ public class OrderRepository {
                                 " join fetch oi.item i", Order.class)
                 // oneToMany fetch join 관계에서는 페이징 불가능
                 // 모든 메모리를 db에서 읽어오기 때문에 매우 위험
-                .setFirstResult(1)
-                .setMaxResults(100)
+//                .setFirstResult(1)
+//                .setMaxResults(100)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d", Order.class
+                ).setFirstResult(offset)
+                .setMaxResults(limit)
                 .getResultList();
     }
 }

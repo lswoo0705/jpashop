@@ -12,6 +12,7 @@ spring:
       hibernate:
 #        show_sql: true
         format_sql: true
+        default_batch_fetch_size: 100 # 최적화 옵션 글로벌 적용(100~1000 사이를 권장)
 
 logging.level:
   org.hibernate.SQL: debug
